@@ -6,7 +6,7 @@ class FIFOBuffer:
 
     def __len__(self):
         return len(self.buf)
-    
+
     def reset(self, pos=0):
         self.rpos = pos
 
@@ -28,9 +28,10 @@ class FIFOBuffer:
 
     def readline(self, read_incomplete=False):
         """Read a line from the buffer.
-        
+
         If 'read_incomplete' is True, will read back an incomplete line too.
-           WARNING: incomplete lines don't increment the read position in the buffer
+
+        WARNING: incomplete lines don't increment the buffer read position
         """
         buf = self.buf
         rpos = self.rpos
@@ -41,10 +42,9 @@ class FIFOBuffer:
                 return ''
             return buf[rpos:]
 
-        next_line = buf[rpos : next_endline + 1]
+        next_line = buf[rpos: next_endline + 1]
         self.rpos = next_endline + 1
         return next_line
 
     def getvalue(self):
         return self.buf
-    
